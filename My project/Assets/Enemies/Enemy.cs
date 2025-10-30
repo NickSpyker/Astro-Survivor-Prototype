@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
     [Header("Stats")]
@@ -12,17 +12,17 @@ public class Enemy : MonoBehaviour
     protected float currentSpeed;
 
     protected Transform player;
-    protected Rigidbody2D rb;
+    protected Rigidbody rb;
 
     public event Action OnDeath;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
         if (rb == null)
         {
-            Debug.LogError("Rigidbody2D not found");
+            Debug.LogError("Rigidbody not found");
             return;
         }
 
@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {

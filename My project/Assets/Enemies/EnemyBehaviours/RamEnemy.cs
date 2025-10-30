@@ -6,10 +6,14 @@ public class RamEnemy : Enemy
     {
         if (player == null) return;
         
-        Vector2 direction = (player.position - transform.position).normalized;
+        Vector3 direction = (player.position - transform.position);
+        direction.y = 0f;
+        direction = direction.normalized;
         rb.linearVelocity = direction * currentSpeed;
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+        if (direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+        }
     }
 }

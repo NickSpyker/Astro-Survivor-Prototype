@@ -13,8 +13,10 @@ public class GatlingEnemy : Enemy
     {
         if (player == null) return;
         
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        Vector2 direction = (player.position - transform.position).normalized;
+        Vector3 toPlayer = player.position - transform.position;
+        toPlayer.y = 0f;
+        float distanceToPlayer = toPlayer.magnitude;
+        Vector3 direction = distanceToPlayer > 0f ? toPlayer / distanceToPlayer : Vector3.zero;
         
         if (distanceToPlayer < keepDistanceRange)
         {
@@ -26,7 +28,7 @@ public class GatlingEnemy : Enemy
         }
         else
         {
-            Vector2 strafeDirection = new Vector2(-direction.y, direction.x);
+            Vector3 strafeDirection = Vector3.Cross(Vector3.up, direction).normalized;
             rb.linearVelocity = strafeDirection * currentSpeed * 0.5f;
         }
         
@@ -36,8 +38,10 @@ public class GatlingEnemy : Enemy
             lastAttackTime = Time.time;
         }
         
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+        if (direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+        }
     }
 
     void Shoot()
