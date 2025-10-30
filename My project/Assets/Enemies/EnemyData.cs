@@ -25,7 +25,7 @@ public class EnemyData : ScriptableObject
     [Header("Stats")]
     public float baseHP;
     public float baseDamage;
-    public float baseSpeed;
+    public float baseSpeed = 7.5f;
 
     [Header("Behavior")]
     public EnemyBehaviorType behaviorType;

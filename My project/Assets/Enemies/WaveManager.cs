@@ -76,7 +76,7 @@ public class WaveManager : MonoBehaviour
     Vector3 GetRandomSpawnPosition()
     {
         float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-        Vector3 offset = new Vector3(Mathf.Cos(angle), player.position.y, Mathf.Sin(angle)) * spawnRadius;
+        Vector3 offset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * spawnRadius;
         return player.position + offset;
     }
 
