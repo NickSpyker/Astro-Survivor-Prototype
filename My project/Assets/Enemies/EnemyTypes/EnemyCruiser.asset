@@ -16,7 +16,7 @@ MonoBehaviour:
   type: 2
   baseHP: 50
   baseDamage: 10
-  baseSpeed: 33
+  baseSpeed: 7.5
   behaviorType: 0
   attackRange: 50
   prefab: {fileID: 0}
