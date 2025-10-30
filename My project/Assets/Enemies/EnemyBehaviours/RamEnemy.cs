@@ -6,7 +6,7 @@ public class RamEnemy : Enemy
     {
         if (player == null) return;
         
-        Vector3 direction = (player.position - transform.position);
+        Vector3 direction = player.position - transform.position;
         direction.y = 0f;
         direction = direction.normalized;
         rb.linearVelocity = direction * currentSpeed;
@@ -15,5 +15,7 @@ public class RamEnemy : Enemy
         {
             transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
         }
+
+        rb.position = new Vector3(rb.position.x, player.position.y, rb.position.z);
     }
 }
