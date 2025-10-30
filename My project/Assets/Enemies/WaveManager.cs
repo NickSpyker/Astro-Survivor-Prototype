@@ -73,13 +73,13 @@ public class WaveManager : MonoBehaviour
         enemyScript.OnDeath += () => enemiesRemaining--;
     }
 
-    Vector2 GetRandomSpawnPosition()
+    Vector3 GetRandomSpawnPosition()
     {
         float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-        Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * spawnRadius;
-        return (Vector2)player.position + offset;
+        Vector3 offset = new Vector3(Mathf.Cos(angle), player.position.y, Mathf.Sin(angle)) * spawnRadius;
+        return player.position + offset;
     }
-    
+
     void OnZoneComplete()
     {
         // TODO: Open merchant
