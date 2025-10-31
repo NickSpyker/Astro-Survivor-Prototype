@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7209026393589866040}
   - component: {fileID: 9097294905614990041}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 5364218305757331297}
   - component: {fileID: 8494636353275267528}
   - component: {fileID: 8926458551864374760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,8 +265,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8983627555823743720}
   - component: {fileID: 7626275800744661882}
-  - component: {fileID: 456570740570610999}
-  m_Layer: 0
+  - component: {fileID: 335061927976139562}
+  m_Layer: 8
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,11 +313,11 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &456570740570610999
+--- !u!114 &335061927976139562
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8117420263929972059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 831312de03c748244bc74c849c82bb43, type: 3}
+  m_Script: {fileID: 11500000, guid: 63878c9a372b04140bb7c69605fe438a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   speed: 50
