@@ -3,9 +3,11 @@ using UnityEngine;
 public class GatlingEnemy : Enemy
 {
     [Header("Weapon")]
-    public GameObject projectilePrefab;
     public float attackCooldown = 0.5f;
-    public float keepDistanceRange = 5f;
+    public float keepDistanceRange = 10f;
+    public Transform firePoint;
+    public string projectilePoolName = "EnemyBullet";
+    public float projectileDamage = 5f;
 
     private float lastAttackTime;
 
@@ -46,7 +48,47 @@ public class GatlingEnemy : Enemy
 
     void Shoot()
     {
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-        // projectile.GetComponent<EnemyProjectile>().Initialize(2f);
+        if (player == null) return;
+
+        // Use firePoint if available, otherwise use transform position
+        Vector3 spawnPosition = firePoint != null ? firePoint.position : transform.position + transform.forward * 1f;
+        Vector3 direction = (player.position - spawnPosition).normalized;
+
+        // Check if ProjectilePoolManager exists
+        if (ProjectilePoolManager.Instance != null)
+        {
+            GameObject projectileObj = ProjectilePoolManager.Instance.SpawnProjectile(
+                projectilePoolName,
+                spawnPosition,
+                Quaternion.LookRotation(direction)
+            );
+
+            if (projectileObj != null)
+            {
+                Projectile projectile = projectileObj.GetComponent<Projectile>();
+                if (projectile != null)
+                {
+                    projectile.Initialize(
+                        ProjectileOwner.Enemy,
+                        direction,
+                        projectileDamage,
+                        1f,     // No multiplier
+                        1f,     // No range multiplier
+                        0,      // No piercing
+                        false   // Not critical
+                    );
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning("ProjectilePoolManager not found! Make sure it exists in the scene.");
+        }
+
+        // Spawn muzzle flash if available
+        if (ParticleEffects.Instance != null)
+        {
+            ParticleEffects.Instance.SpawnMuzzleFlash(spawnPosition, transform.rotation);
+        }
     }
 }

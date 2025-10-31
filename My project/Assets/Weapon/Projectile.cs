@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] public float speed = 50f;
     [SerializeField] public float lifetime = 50f;
     [SerializeField] public float damage = 10f;
-    [SerializeField] public int piercing = 0; // How many enemies it can pierce through
+    [SerializeField] public int piercing = 0; // 0 = dies after 1 hit, 1 = can hit 2 enemies, etc.
     [SerializeField] public float range = 500f;
 
     [Header("Visual")]
@@ -105,9 +105,16 @@ public class Projectile : MonoBehaviour
 
             SpawnImpactEffect(other.transform.position);
 
-            // Destroy if piercing limit reached
-            if (piercedCount > piercing)
+            // Destroy after hitting enemy (piercing = 0 means no pierce, destroy after first hit)
+            // piercing = 1 means can hit 2 enemies total, etc.
+            if (piercing == 0)
             {
+                // No piercing - always destroy after first hit
+                DestroyProjectile();
+            }
+            else if (piercedCount > piercing)
+            {
+                // Has piercing but reached the limit
                 DestroyProjectile();
             }
         }
