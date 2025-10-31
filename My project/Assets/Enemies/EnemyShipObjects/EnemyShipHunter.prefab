@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8867573920578152899}
   - component: {fileID: 5310877040738259573}
   - component: {fileID: 5053735282295362415}
+  - component: {fileID: 6463263280977193603}
   m_Layer: 7
   m_Name: EnemyShipHunter
   m_TagString: Enemy
@@ -31,7 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7107594790347572873}
+  - {fileID: 3879354767428934654}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5310877040738259573
@@ -56,7 +57,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -74,10 +75,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GatlingEnemy
   enemyData: {fileID: 11400000, guid: f891e6e7206ce874aab380da2b269bf5, type: 2}
-  projectilePrefab: {fileID: 8117420263929972059, guid: 034cfd0b446ccf742a4192e374c90b39, type: 3}
   attackCooldown: 0.5
   keepDistanceRange: 5
---- !u!1001 &9009675729928988676
+  firePoint: {fileID: 0}
+  projectilePoolName: EnemyBullet
+  projectileDamage: 5
+--- !u!136 &6463263280977193603
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4273824748325379954}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.06
+  m_Height: 4.87
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &3628922622792481813
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -85,69 +111,82 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8867573920578152899}
     m_Modifications:
-    - target: {fileID: 1504240990566085687, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
-      propertyPath: m_Name
-      value: USS-Virginia_dark Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 2282185481392598669, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.02
       objectReference: {fileID: 0}
-    - target: {fileID: 2282185481392598669, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.02
       objectReference: {fileID: 0}
-    - target: {fileID: 2282185481392598669, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.02
       objectReference: {fileID: 0}
-    - target: {fileID: 2282185481392598669, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2282185481392598669, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2282185481392598669, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2282185481392598669, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2282185481392598669, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 2282185481392598669, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 2282185481392598669, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 2282185481392598669, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2282185481392598669, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2282185481392598669, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
+      propertyPath: m_Name
+      value: USS-Virginia_blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165801339405558778, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e01e2601c1e0fbd4986cafacbd617cfc, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -5160932983144309104, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
+    - {fileID: -737902732094599762, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
+    - {fileID: 5595841563283010543, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
+    - {fileID: 70695132689555103, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
+    - {fileID: 7954891552115039374, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
+    - {fileID: -3438391233031666662, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
+    - {fileID: -2654170883565237655, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
+    - {fileID: 4628093137235757607, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
+    - {fileID: -8964325598668163870, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
---- !u!4 &7107594790347572873 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
+--- !u!4 &3879354767428934654 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2282185481392598669, guid: a18165f4fc1ef2244802a0de022b9b3f, type: 3}
-  m_PrefabInstance: {fileID: 9009675729928988676}
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 77bd0b70462483b488a912daf48f5e4f, type: 3}
+  m_PrefabInstance: {fileID: 3628922622792481813}
   m_PrefabAsset: {fileID: 0}
