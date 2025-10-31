@@ -50,7 +50,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        Debug.Log("Enemy took damage: " + damage);
         currentHP -= damage;
+        Debug.Log("Enemy current HP: " + currentHP);
         if (currentHP <= 0)
         {
             Die();

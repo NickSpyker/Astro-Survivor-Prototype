@@ -87,6 +87,10 @@ public class Projectile : MonoBehaviour
     {
         // Check if hit an enemy
         IDamageable damageable = other.GetComponent<IDamageable>();
+
+        Debug.Log("Dammageable: " + damageable != null);
+        Debug.Log("Enemy: "       + other.CompareTag("Enemy"));
+
         if (damageable != null && other.CompareTag("Enemy"))
         {
             float finalDamage = damage * damageMultiplier;
@@ -96,7 +100,7 @@ public class Projectile : MonoBehaviour
                 finalDamage *= 2f; // Base critical multiplier
             }
             
-            damageable.TakeDamage(finalDamage);
+            other.gameObject.GetComponent<Enemy>().TakeDamage(finalDamage);
             piercedCount++;
             
             SpawnImpactEffect(other.transform.position);

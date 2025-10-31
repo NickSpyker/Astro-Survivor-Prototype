@@ -19,4 +19,4 @@ MonoBehaviour:
   baseSpeed: 7.5
   behaviorType: 1
   attackRange: 50
-  prefab: {fileID: 0}
+  prefab: {fileID: 4273824748325379954, guid: 87a8c66a417f9e94faabaa22e098e303, type: 3}
