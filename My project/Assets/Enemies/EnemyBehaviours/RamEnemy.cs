@@ -15,7 +15,5 @@ public class RamEnemy : Enemy
         {
             transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
         }
-
-        rb.position = new Vector3(rb.position.x, player.position.y, rb.position.z);
     }
 }

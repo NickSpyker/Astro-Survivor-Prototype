@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Move();
+        rb.position = new Vector3(rb.position.x, player.position.y, rb.position.z);
     }
 
     protected virtual void Move() { /* To be overridden */ }
