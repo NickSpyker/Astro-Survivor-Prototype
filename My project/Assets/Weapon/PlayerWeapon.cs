@@ -82,17 +82,17 @@ public class PlayerWeapon : MonoBehaviour
     {
         // Select fire point
         Transform firePoint = firePoints.Length > 0 ? firePoints[index % firePoints.Length] : transform;
-        
+
         // Calculate direction with spread
         Vector3 direction = CalculateProjectileDirection(index, totalCount);
-        
+
         // Spawn projectile from pool
         GameObject projectileObj = ProjectilePoolManager.Instance.SpawnProjectile(
-            projectilePoolName, 
-            firePoint.position, 
+            projectilePoolName,
+            firePoint.position,
             Quaternion.LookRotation(direction)
         );
-        
+
         if (projectileObj != null)
         {
             Projectile projectile = projectileObj.GetComponent<Projectile>();
@@ -105,6 +105,18 @@ public class PlayerWeapon : MonoBehaviour
                 weaponStats.piercing,
                 isCritical
             );
+        }
+
+        // Juice effects for firing
+        if (ParticleEffects.Instance != null)
+        {
+            ParticleEffects.Instance.SpawnMuzzleFlash(firePoint.position, firePoint.rotation);
+        }
+
+        // Very light camera shake on shooting
+        if (CameraShake.Instance != null && index == 0) // Only shake once per Fire() call
+        {
+            CameraShake.Instance.Shake(0.05f, 0.02f, 0.2f);
         }
     }
 

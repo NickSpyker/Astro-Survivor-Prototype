@@ -48,11 +48,45 @@ public class Enemy : MonoBehaviour, IDamageable
 
     protected virtual void Move() { /* To be overridden */ }
 
+    // Interface implementation - required by IDamageable
     public void TakeDamage(float damage)
+    {
+        TakeDamage(damage, false);
+    }
+
+    // Overloaded version with critical hit support
+    public void TakeDamage(float damage, bool isCritical)
     {
         Debug.Log("Enemy took damage: " + damage);
         currentHP -= damage;
         Debug.Log("Enemy current HP: " + currentHP);
+
+        // Spawn damage number
+        if (DamageNumberSpawner.Instance != null)
+        {
+            Vector3 numberPosition = transform.position + Vector3.up * 2f;
+            DamageNumberSpawner.Instance.SpawnDamageNumber(numberPosition, damage, isCritical);
+        }
+
+        // Hit impact particle
+        if (ParticleEffects.Instance != null)
+        {
+            ParticleEffects.Instance.SpawnHitImpact(transform.position, isCritical);
+        }
+
+        // Light camera shake on hit
+        if (CameraShake.Instance != null)
+        {
+            if (isCritical)
+            {
+                CameraShake.Instance.ShakeMedium();
+            }
+            else
+            {
+                CameraShake.Instance.ShakeLight();
+            }
+        }
+
         if (currentHP <= 0)
         {
             Die();
@@ -61,6 +95,30 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Die()
     {
+        IsDead = true;
+
+        // Juice effects for death
+        if (ParticleEffects.Instance != null)
+        {
+            ParticleEffects.Instance.SpawnEnemyDeathExplosion(transform.position);
+        }
+
+        if (JuiceManager.Instance != null)
+        {
+            JuiceManager.Instance.EnemyKillJuice();
+        }
+
+        if (CameraShake.Instance != null)
+        {
+            CameraShake.Instance.ShakeMedium();
+        }
+
+        // Update UI
+        if (GameUI.Instance != null)
+        {
+            GameUI.Instance.AddKill();
+        }
+
         OnDeath?.Invoke();
         Destroy(gameObject);
     }

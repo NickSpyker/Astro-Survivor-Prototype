@@ -99,12 +99,12 @@ public class Projectile : MonoBehaviour
                 // Critical damage will be calculated in weapon system
                 finalDamage *= 2f; // Base critical multiplier
             }
-            
-            other.gameObject.GetComponent<Enemy>().TakeDamage(finalDamage);
+
+            other.gameObject.GetComponent<Enemy>().TakeDamage(finalDamage, isCritical);
             piercedCount++;
-            
+
             SpawnImpactEffect(other.transform.position);
-            
+
             // Destroy if piercing limit reached
             if (piercedCount > piercing)
             {
