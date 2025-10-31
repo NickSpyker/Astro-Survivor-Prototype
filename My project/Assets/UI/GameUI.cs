@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class GameUI : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class GameUI : MonoBehaviour
     [Header("Score")]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI killCountText;
+    [SerializeField] private GameObject scorePopupPrefab;
+    [SerializeField] private Transform scorePopupParent;
 
     [Header("Wave Info")]
     [SerializeField] private TextMeshProUGUI waveText;
@@ -23,12 +26,18 @@ public class GameUI : MonoBehaviour
     [Header("Combo")]
     [SerializeField] private TextMeshProUGUI comboText;
     [SerializeField] private GameObject comboContainer;
+    [SerializeField] private Image comboBackground;
+
+    [Header("Kill Streak Messages")]
+    [SerializeField] private TextMeshProUGUI killStreakText;
+    [SerializeField] private GameObject killStreakContainer;
 
     private int currentScore = 0;
     private int killCount = 0;
     private int comboCount = 0;
     private float comboTimer = 0f;
     private float comboTimeLimit = 3f;
+    private Coroutine comboAnimationCoroutine;
 
     void Awake()
     {
@@ -47,6 +56,11 @@ public class GameUI : MonoBehaviour
         if (comboContainer != null)
         {
             comboContainer.SetActive(false);
+        }
+
+        if (killStreakContainer != null)
+        {
+            killStreakContainer.SetActive(false);
         }
     }
 
@@ -89,8 +103,26 @@ public class GameUI : MonoBehaviour
 
     public void AddScore(int points)
     {
-        currentScore += points * (1 + comboCount / 10);
+        int multipliedPoints = points * (1 + comboCount / 10);
+        currentScore += multipliedPoints;
         UpdateScoreDisplay();
+
+        // Spawn score popup
+        if (scorePopupPrefab != null && scorePopupParent != null)
+        {
+            GameObject popup = Instantiate(scorePopupPrefab, scorePopupParent);
+            ScorePopup scorePopup = popup.GetComponent<ScorePopup>();
+            if (scorePopup != null)
+            {
+                scorePopup.SetScore(multipliedPoints, comboCount > 1);
+            }
+        }
+
+        // Animate score text
+        if (scoreText != null)
+        {
+            StartCoroutine(UIAnimations.Pulse(scoreText.transform, 1.2f, 0.2f));
+        }
     }
 
     public void AddKill()
@@ -103,9 +135,17 @@ public class GameUI : MonoBehaviour
         if (killCountText != null)
         {
             killCountText.text = $"Kills: {killCount}";
+            StartCoroutine(UIAnimations.Pulse(killCountText.transform, 1.3f, 0.2f));
+        }
+
+        // Show hit marker
+        if (HitMarker.Instance != null)
+        {
+            HitMarker.Instance.ShowHitMarker(false);
         }
 
         UpdateComboDisplay();
+        CheckKillStreak();
         AddScore(100); // Base score per kill
     }
 
@@ -123,18 +163,140 @@ public class GameUI : MonoBehaviour
         {
             if (comboCount > 1)
             {
+                bool wasActive = comboContainer.activeSelf;
                 comboContainer.SetActive(true);
                 comboText.text = $"{comboCount}x COMBO!";
 
-                // Pulse effect for combo
-                float scale = 1f + (comboCount * 0.05f);
-                comboText.transform.localScale = Vector3.one * Mathf.Min(scale, 2f);
+                // Pop in animation when combo first appears
+                if (!wasActive)
+                {
+                    if (comboAnimationCoroutine != null)
+                    {
+                        StopCoroutine(comboAnimationCoroutine);
+                    }
+                    comboAnimationCoroutine = StartCoroutine(ComboPopInAnimation());
+                }
+                else
+                {
+                    // Just pulse on combo increase
+                    StartCoroutine(UIAnimations.Pulse(comboText.transform, 1.4f, 0.25f));
+                    StartCoroutine(UIAnimations.RotatePunch(comboText.transform, 10f, 0.25f));
+                }
+
+                // Change color based on combo level
+                if (comboCount >= 10)
+                {
+                    comboText.color = Color.red;
+                    if (comboCount >= 20)
+                    {
+                        StartCoroutine(UIAnimations.RainbowCycle(comboText, 0.5f));
+                    }
+                }
+                else if (comboCount >= 5)
+                {
+                    comboText.color = new Color(1f, 0.5f, 0f); // Orange
+                }
+                else
+                {
+                    comboText.color = Color.yellow;
+                }
             }
             else
             {
-                comboContainer.SetActive(false);
+                StartCoroutine(ComboFadeOut());
             }
         }
+    }
+
+    private IEnumerator ComboPopInAnimation()
+    {
+        // Slide in from top with scale
+        yield return StartCoroutine(UIAnimations.PopIn(comboContainer.transform, 0.4f, 1.3f));
+        yield return StartCoroutine(UIAnimations.ShakeUI(comboContainer.transform, 5f, 0.15f));
+    }
+
+    private IEnumerator ComboFadeOut()
+    {
+        yield return new WaitForSeconds(0.3f);
+        if (comboContainer != null)
+        {
+            comboContainer.SetActive(false);
+        }
+    }
+
+    private void CheckKillStreak()
+    {
+        string streakMessage = "";
+        bool showStreak = false;
+
+        if (killCount == 5)
+        {
+            streakMessage = "KILLING SPREE!";
+            showStreak = true;
+        }
+        else if (killCount == 10)
+        {
+            streakMessage = "RAMPAGE!";
+            showStreak = true;
+        }
+        else if (killCount == 15)
+        {
+            streakMessage = "DOMINATING!";
+            showStreak = true;
+        }
+        else if (killCount == 20)
+        {
+            streakMessage = "UNSTOPPABLE!";
+            showStreak = true;
+        }
+        else if (killCount == 30)
+        {
+            streakMessage = "GODLIKE!";
+            showStreak = true;
+        }
+        else if (killCount % 50 == 0 && killCount > 0)
+        {
+            streakMessage = "LEGENDARY!";
+            showStreak = true;
+        }
+
+        if (showStreak && killStreakText != null && killStreakContainer != null)
+        {
+            StartCoroutine(ShowKillStreakMessage(streakMessage));
+        }
+    }
+
+    private IEnumerator ShowKillStreakMessage(string message)
+    {
+        killStreakContainer.SetActive(true);
+        killStreakText.text = message;
+
+        // Epic entrance animation
+        yield return StartCoroutine(UIAnimations.PopIn(killStreakContainer.transform, 0.5f, 1.5f));
+        yield return StartCoroutine(UIAnimations.ShakeUI(killStreakContainer.transform, 10f, 0.2f));
+
+        // Rainbow effect for epic feel
+        StartCoroutine(UIAnimations.RainbowCycle(killStreakText, 1f));
+
+        // Hold for 2 seconds
+        yield return new WaitForSecondsRealtime(2f);
+
+        // Fade out
+        float duration = 0.5f;
+        float elapsed = 0f;
+        Color originalColor = killStreakText.color;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            Color c = originalColor;
+            c.a = Mathf.Lerp(1f, 0f, elapsed / duration);
+            killStreakText.color = c;
+            yield return null;
+        }
+
+        killStreakContainer.SetActive(false);
+        killStreakText.color = originalColor;
     }
 
     private void ResetCombo()

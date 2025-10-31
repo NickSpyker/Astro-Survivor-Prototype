@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 9dafc2f4592056c428488e2722b7a9b3, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 81f714daf7144784b8a2f42f1cd30927, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -222,14 +222,14 @@ RectTransform:
   m_GameObject: {fileID: 209225403}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 6.7164006, y: 6.7164006, z: 6.7164006}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 17331125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -297}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &209225405
@@ -279,15 +279,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1201,8 +1201,8 @@ MonoBehaviour:
   healthText: {fileID: 0}
   healthColorGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
+    key0: {r: 0.12125456, g: 1, b: 0, a: 1}
+    key1: {r: 0.53943753, g: 1, b: 0, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1231,10 +1231,15 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   scoreText: {fileID: 1158399692}
   killCountText: {fileID: 1771786554}
+  scorePopupPrefab: {fileID: 0}
+  scorePopupParent: {fileID: 0}
   waveText: {fileID: 0}
   enemyCountText: {fileID: 0}
   comboText: {fileID: 209225405}
   comboContainer: {fileID: 17331124}
+  comboBackground: {fileID: 0}
+  killStreakText: {fileID: 0}
+  killStreakContainer: {fileID: 0}
 --- !u!1 &642212507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,7 +1273,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c61e4c4a046ea7841b21ab218e3ac00a, type: 2}
   - {fileID: 11400000, guid: c61e4c4a046ea7841b21ab218e3ac00a, type: 2}
   - {fileID: 11400000, guid: c61e4c4a046ea7841b21ab218e3ac00a, type: 2}
-  spawnRadius: 50
+  spawnRadius: 15
   player: {fileID: 291005295}
 --- !u!4 &642212509
 Transform:
