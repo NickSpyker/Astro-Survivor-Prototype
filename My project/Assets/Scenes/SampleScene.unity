@@ -1266,7 +1266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   zones:
   - {fileID: 11400000, guid: c61e4c4a046ea7841b21ab218e3ac00a, type: 2}
-  spawnRadius: 15
+  spawnRadius: 50
   player: {fileID: 291005295}
 --- !u!4 &642212509
 Transform:

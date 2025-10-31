@@ -16,4 +16,4 @@ MonoBehaviour:
   - enemyData: {fileID: 11400000, guid: ef92fc6980c1a3c4d883d40d63b07a68, type: 2}
     count: 5
     spawnDelay: 0
-  timeBetweenWaves: 0
+  timeBetweenWaves: 3
