@@ -9,11 +9,11 @@ public enum ProjectileOwner
 public class Projectile : MonoBehaviour
 {
     [Header("Projectile Stats")]
-    [SerializeField] public float speed = 10f;
-    [SerializeField] public float lifetime = 5f;
+    [SerializeField] public float speed = 50f;
+    [SerializeField] public float lifetime = 50f;
     [SerializeField] public float damage = 10f;
     [SerializeField] public int piercing = 0; // How many enemies it can pierce through
-    [SerializeField] public float range = 50f;
+    [SerializeField] public float range = 500f;
 
     [Header("Visual")]
     [SerializeField] public GameObject impactEffectPrefab;

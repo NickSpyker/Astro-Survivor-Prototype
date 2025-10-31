@@ -15,12 +15,20 @@ public class Player: MonoBehaviour
 
     private Rigidbody _rigidbody;
 
+    private PlayerWeapon _playerWeapon;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         this.runtimeStats = playerStats;
         _rigidbody = this.GetComponent<Rigidbody>();
         _rigidbody.useGravity = false;
+        _playerWeapon = this.GetComponent<PlayerWeapon>();
+        if (_playerWeapon == null)
+        {
+            Debug.LogError("PlayerWeapon not found");
+            return;
+        }
     }
 
     // Update is called once per frame
@@ -49,8 +57,9 @@ public class Player: MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             System.Diagnostics.Debug.WriteLine("Shoot!");
-            GameObject missile = Instantiate(GameObject.CreatePrimitive(PrimitiveType.Sphere), transform.position + (transform.rotation * new Vector3(0, 0, 2)), transform.rotation);
-            missile.AddComponent<Missile>();
+            //GameObject missile = Instantiate(GameObject.CreatePrimitive(PrimitiveType.Sphere), transform.position + (transform.rotation * new Vector3(0, 0, 2)), transform.rotation);
+            //missile.AddComponent<Missile>();
+            _playerWeapon.Fire();
         }
     }
 }

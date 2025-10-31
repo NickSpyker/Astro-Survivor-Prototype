@@ -28,7 +28,7 @@ public class PlayerWeapon : MonoBehaviour
     
     private float nextFireTime = 0f;
     private Transform targetEnemy;
-    private bool isAutomatic = true;
+    private bool isAutomatic = false;
 
     private void Update()
     {
