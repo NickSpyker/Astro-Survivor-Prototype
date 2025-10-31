@@ -137,6 +137,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::movements
   playerStats: {fileID: 11400000, guid: 939fcb81931300c41876bacadff70e41, type: 2}
+  runtimeStats: {fileID: 0}
+--- !u!4 &291005295 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 269703451397612532, guid: 7c6133b4c3f81ab4e9507deb2cbd8cc8, type: 3}
+  m_PrefabInstance: {fileID: 62100636466975827}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &291005296
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291005290}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &291005297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291005290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85385817231d7324fb077681b7bd7734, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeapon
+  weaponStats:
+    weaponName: Gatling MK-42
+    baseDamage: 10
+    attackSpeed: 0.2
+    projectileCount: 1
+    range: 50
+    piercing: 0
+    spread: 5
+  projectilePoolName: PlayerBullet
+  firePoints: []
+  playerStats: {fileID: 11400000, guid: 939fcb81931300c41876bacadff70e41, type: 2}
+  fireSound: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,6 +347,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Player.Scripts.objectFollower
   obj: {fileID: 291005290}
   offset: {x: 0, y: 50, z: 0}
+--- !u!1 &388614193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 388614195}
+  - component: {fileID: 388614194}
+  m_Layer: 0
+  m_Name: WaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &388614194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388614193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80447017a1d453499b60f6fbd02e89e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  zones:
+  - {fileID: 11400000, guid: c61e4c4a046ea7841b21ab218e3ac00a, type: 2}
+  spawnRadius: 15
+  player: {fileID: 291005295}
+--- !u!4 &388614195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388614193}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +633,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &954749097
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 954749098}
+  - component: {fileID: 954749099}
+  m_Layer: 0
+  m_Name: ProjectilePoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &954749098
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954749097}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &954749099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954749097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a098adca6f1a8f409dc9cfa0c67cda0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectilePoolManager
+  pools:
+  - poolName: PlayerBullet
+    projectilePrefab: {fileID: 8117420263929972059, guid: 034cfd0b446ccf742a4192e374c90b39, type: 3}
+    poolSize: 150
+    expandable: 0
+  - poolName: EnemyBullet
+    projectilePrefab: {fileID: 8117420263929972059, guid: 034cfd0b446ccf742a4192e374c90b39, type: 3}
+    poolSize: 250
+    expandable: 0
+  - poolName: Missile
+    projectilePrefab: {fileID: 8117420263929972059, guid: 034cfd0b446ccf742a4192e374c90b39, type: 3}
+    poolSize: 50
+    expandable: 0
 --- !u!1 &1187260746
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,11 +1115,19 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1306844907197355031, guid: 7c6133b4c3f81ab4e9507deb2cbd8cc8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 291005291}
+    - targetCorrespondingSourceObject: {fileID: 1306844907197355031, guid: 7c6133b4c3f81ab4e9507deb2cbd8cc8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 291005296}
+    - targetCorrespondingSourceObject: {fileID: 1306844907197355031, guid: 7c6133b4c3f81ab4e9507deb2cbd8cc8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 291005297}
   m_SourcePrefab: {fileID: 100100000, guid: 7c6133b4c3f81ab4e9507deb2cbd8cc8, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 954749098}
+  - {fileID: 388614195}
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 62100636466975827}
