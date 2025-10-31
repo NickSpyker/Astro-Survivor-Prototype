@@ -88,8 +88,8 @@ public class Projectile : MonoBehaviour
         // Check if hit an enemy
         IDamageable damageable = other.GetComponent<IDamageable>();
 
-        Debug.Log("Dammageable: " + damageable != null);
-        Debug.Log("Enemy: "       + other.CompareTag("Enemy"));
+        Debug.Log("Damageable: " + (damageable != null));
+        Debug.Log("Enemy: " + other.CompareTag("Enemy"));
 
         if (damageable != null && other.CompareTag("Enemy"))
         {
