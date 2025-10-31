@@ -87,6 +87,12 @@ public class Enemy : MonoBehaviour, IDamageable
             }
         }
 
+        // Show hit marker
+        if (HitMarker.Instance != null)
+        {
+            HitMarker.Instance.ShowHitMarker(isCritical);
+        }
+
         if (currentHP <= 0)
         {
             Die();
