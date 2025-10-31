@@ -20,5 +20,5 @@ MonoBehaviour:
   criticalChances: 50
   criticalDamage: 2
   attackSpeed: 0
-  moveSpeed: 1
+  moveSpeed: 10
   pickupRange: 0
