@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable
 {
     [Header("Stats")]
     public EnemyData enemyData;
@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     protected Rigidbody rb;
 
     public event Action OnDeath;
+    public bool IsDead { get; private set; } = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

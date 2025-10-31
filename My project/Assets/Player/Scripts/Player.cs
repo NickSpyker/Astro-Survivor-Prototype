@@ -7,7 +7,7 @@ public class Player: MonoBehaviour
 {
     public PlayerStats playerStats;
 
-    private PlayerStats runtimeStats;
+    public PlayerStats runtimeStats;
 
     private Vector2 _windowSize = new Vector2(Screen.width, Screen.height);
 
